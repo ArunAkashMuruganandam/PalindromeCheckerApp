@@ -1,0 +1,34 @@
+public class NormalizedPalindrome {
+
+    public static boolean isPalindrome(String str) {
+        if (str == null) {
+            return false;
+        }
+
+        String normalized = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        char[] charArray = normalized.toCharArray();
+        int left = 0;
+        int right = charArray.length - 1;
+
+        while (left < right) {
+            if (charArray[left] != charArray[right]) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        String test1 = "A man, a plan, a canal: Panama";
+        String test2 = "No 'x' in Nixon";
+        String test3 = "Hello World";
+
+        System.out.println("Is '" + test1 + "' a palindrome? " + isPalindrome(test1));
+        System.out.println("Is '" + test2 + "' a palindrome? " + isPalindrome(test2));
+        System.out.println("Is '" + test3 + "' a palindrome? " + isPalindrome(test3));
+    }
+}
