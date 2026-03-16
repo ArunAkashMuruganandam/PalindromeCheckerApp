@@ -1,0 +1,36 @@
+public class PalindromeChecker {
+
+    public boolean checkPalindrome(String str) {
+        if (str == null) {
+            return false;
+        }
+
+        String normalized = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        char[] charArray = normalized.toCharArray();
+        
+        int left = 0;
+        int right = charArray.length - 1;
+
+        while (left < right) {
+            if (charArray[left] != charArray[right]) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        PalindromeChecker checker = new PalindromeChecker();
+        
+        String test1 = "Racecar";
+        String test2 = "Object Oriented";
+
+        System.out.println("Is '" + test1 + "' a palindrome? " + checker.checkPalindrome(test1));
+        System.out.println("Is '" + test2 + "' a palindrome? " + checker.checkPalindrome(test2));
+    }
+}
