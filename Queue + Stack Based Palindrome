@@ -1,0 +1,52 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+public class StructureComparison {
+
+    /**
+     * Checks if a string is a palindrome by comparing Queue (FIFO) 
+     * and Stack (LIFO) outputs.
+     */
+    public static boolean isPalindrome(String str) {
+        // Handle edge cases
+        if (str == null) {
+            return false; 
+        }
+
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
+
+        // 1 & 2. Enqueue characters and Push characters to stack
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            queue.add(c);  // Enqueue: Adds to the back of the queue
+            stack.push(c); // Push: Adds to the top of the stack
+        }
+
+        // 3. Compare dequeue vs pop
+        // We process until the structures are empty
+        while (!queue.isEmpty() && !stack.isEmpty()) {
+            
+            char fifoChar = queue.remove(); // Dequeue: Gets the FIRST character added
+            char lifoChar = stack.pop();    // Pop: Gets the LAST character added
+
+            // Logical Comparison
+            if (fifoChar != lifoChar) {
+                // If the front-to-back doesn't match the back-to-front, it's not a palindrome
+                return false; 
+            }
+        }
+
+        // If the loop finishes, the string reads the same in both directions
+        return true; 
+    }
+
+    public static void main(String[] args) {
+        String test1 = "level";
+        String test2 = "structure";
+
+        System.out.println("Is '" + test1 + "' a palindrome? " + isPalindrome(test1));
+        System.out.println("Is '" + test2 + "' a palindrome? " + isPalindrome(test2));
+    }
+}
