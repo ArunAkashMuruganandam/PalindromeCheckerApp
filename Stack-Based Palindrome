@@ -1,0 +1,46 @@
+import java.util.Stack;
+
+public class StackComparison {
+
+    /**
+     * Checks if a string is a palindrome using a Stack.
+     * Demonstrates LIFO behavior for string reversal.
+     */
+    public static boolean isPalindrome(String str) {
+        // Handle edge cases
+        if (str == null) {
+            return false;
+        }
+
+        Stack<Character> stack = new Stack<>();
+
+        // 1. Push characters into the stack
+        for (int i = 0; i < str.length(); i++) {
+            stack.push(str.charAt(i));
+        }
+
+        // 2. Pop and compare
+        // The stack will pop characters in reverse order (LIFO)
+        for (int i = 0; i < str.length(); i++) {
+            char originalChar = str.charAt(i);
+            char reversedChar = stack.pop();
+
+            if (originalChar != reversedChar) {
+                // If a mismatch is found, it's not a palindrome
+                return false; 
+            }
+        }
+
+        // If all characters match, it is a palindrome
+        return true;
+    }
+
+    public static void main(String[] args) {
+        String test1 = "radar";
+        String test2 = "syntax";
+
+        // 3. Print result
+        System.out.println("Is '" + test1 + "' a palindrome? " + isPalindrome(test1));
+        System.out.println("Is '" + test2 + "' a palindrome? " + isPalindrome(test2));
+    }
+}
