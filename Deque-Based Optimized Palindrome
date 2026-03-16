@@ -1,0 +1,48 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class DequeComparison {
+
+    /**
+     * Checks if a string is a palindrome using a Deque.
+     * Demonstrates accessing and removing from both ends simultaneously.
+     */
+    public static boolean isPalindrome(String str) {
+        // Handle edge cases
+        if (str == null) {
+            return false;
+        }
+
+        // Using ArrayDeque as it is the most efficient Deque implementation in Java
+        Deque<Character> deque = new ArrayDeque<>();
+
+        // 1. Insert characters into deque
+        for (int i = 0; i < str.length(); i++) {
+            deque.addLast(str.charAt(i)); // Preserves the original string order
+        }
+
+        // 2 & 3. Remove first & last, compare until empty or 1 char remains
+        // We check size > 1 because a single remaining character is its own palindrome
+        while (deque.size() > 1) {
+            
+            char frontChar = deque.removeFirst();
+            char rearChar = deque.removeLast();
+
+            if (frontChar != rearChar) {
+                // If the ends don't match, it's not a palindrome
+                return false; 
+            }
+        }
+
+        // If the loop finishes, the front and rear matched all the way to the center
+        return true; 
+    }
+
+    public static void main(String[] args) {
+        String test1 = "madam";
+        String test2 = "deque";
+
+        System.out.println("Is '" + test1 + "' a palindrome? " + isPalindrome(test1));
+        System.out.println("Is '" + test2 + "' a palindrome? " + isPalindrome(test2));
+    }
+}
