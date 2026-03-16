@@ -1,0 +1,84 @@
+class ListNode {
+    char val;
+    ListNode next;
+    
+    ListNode(char x) { 
+        val = x; 
+        next = null; 
+    }
+}
+
+public class LinkedListComparison {
+
+    public static boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        ListNode secondHalf = reverseList(slow);
+        ListNode firstHalf = head;
+
+        ListNode p1 = firstHalf;
+        ListNode p2 = secondHalf;
+        
+        boolean isPalin = true;
+        
+        while (p2 != null) {
+            if (p1.val != p2.val) {
+                isPalin = false;
+                break;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        
+        return isPalin;
+    }
+
+    private static ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        
+        return prev;
+    }
+
+    public static ListNode stringToList(String str) {
+        if (str == null || str.length() == 0) return null;
+        
+        ListNode dummy = new ListNode('\0');
+        ListNode current = dummy;
+        
+        for (char c : str.toCharArray()) {
+            current.next = new ListNode(c);
+            current = current.next;
+        }
+        
+        return dummy.next;
+    }
+
+    public static void main(String[] args) {
+        String test1 = "kayak";
+        String test2 = "nodes";
+
+        ListNode list1 = stringToList(test1);
+        ListNode list2 = stringToList(test2);
+
+        System.out.println("Is '" + test1 + "' a palindrome? " + isPalindrome(list1));
+        System.out.println("Is '" + test2 + "' a palindrome? " + isPalindrome(list2));
+    }
+}
