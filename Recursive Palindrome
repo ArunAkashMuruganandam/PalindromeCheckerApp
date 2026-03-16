@@ -1,0 +1,29 @@
+public class RecursionComparison {
+
+    public static boolean isPalindrome(String str) {
+        if (str == null) {
+            return false;
+        }
+        return checkPalindrome(str, 0, str.length() - 1);
+    }
+
+    private static boolean checkPalindrome(String str, int left, int right) {
+        if (left >= right) {
+            return true;
+        }
+        
+        if (str.charAt(left) != str.charAt(right)) {
+            return false;
+        }
+        
+        return checkPalindrome(str, left + 1, right - 1);
+    }
+
+    public static void main(String[] args) {
+        String test1 = "rotor";
+        String test2 = "recursive";
+
+        System.out.println("Is '" + test1 + "' a palindrome? " + isPalindrome(test1));
+        System.out.println("Is '" + test2 + "' a palindrome? " + isPalindrome(test2));
+    }
+}
